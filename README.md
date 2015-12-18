@@ -1,5 +1,6 @@
 # nginx_zookeeper
 linux system info(cpu.memory,nginx connectings) sync to zookeeper ..
+sysc upstream state from zookeeper..
 
 Nginx Zookeeper Module
 ----
