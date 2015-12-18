@@ -1,0 +1,13 @@
+language: c
+
+env:
+    - NGINX_VERSION=1.8.0 LIBZOOKEEPER_VERSION=3.5.0-alpha
+    - NGINX_VERSION=1.8.0 LIBZOOKEEPER_VERSION=3.4.6
+
+before_script:
+    - ./.travis/install_libzookeeper.sh $LIBZOOKEEPER_VERSION
+    - ./.travis/download_nginx.sh $NGINX_VERSION
+    - export LIBZOOKEEPER_PREFIX=${HOME}/libzookeeper-${LIBZOOKEEPER_VERSION}
+
+script:
+    - cd nginx-$NGINX_VERSION && ./configure --add-module=../ && make

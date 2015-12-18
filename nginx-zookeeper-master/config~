@@ -1,0 +1,14 @@
+ngx_addon_name=ngx_http_zookeeper_module
+HTTP_MODULES="$HTTP_MODULES ngx_http_zookeeper_module"
+
+NGX_ADDON_SRCS="$NGX_ADDON_SRCS $ngx_addon_dir/ngx_http_zookeeper_module.c $ngx_addon_dir/cJSON.c"
+
+NGX_ADDON_DEPS="$NGX_ADDON_SRCS $ngx_addon_dir/cJSON.h"
+
+if [ "$LIBZOOKEEPER_PREFIX" == "" ]; then
+    LIBZOOKEEPER_PREFIX="/usr/local/libzookeeper-3.5.0"
+fi
+
+CORE_INCS="$CORE_INCS $LIBZOOKEEPER_PREFIX/include"
+CORE_LIBS="$CORE_LIBS -lm -Wl,-R$LIBZOOKEEPER_PREFIX -L$LIBZOOKEEPER_PREFIX -lzookeeper_mt "
+CORE_LIBS="$CORE_LIBS -L/usr/lib/x86_64-linux-gnu"
