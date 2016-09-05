@@ -40,11 +40,29 @@ Configuration
 * zookeeper_upstream_workload_path
     get upstream servsers workload data
     	
+* gateway_gps_latitude
+	set nginx gps  latitude info
+
+* gateway_gps_longitude
+    set nginx gps longitude info
+
+* gateway_host_name
+   set nginx public ip and port
+
+* gateway_tls_ver
+  set nginx ssl/tls version 
 	
 Examples
 ====
 
-    zookeeper_host "192.168.0.2:2181,192.168.0.3:2181"
-    zookeeper_path "/nginx/foo"
-    zookeeper_workload_update 1s;
-    zookeeper_upstream_workload_path  500 "/service/min";
+    zookeeper_path "/vargoservice/gateway";
+
+    zookeeper_workload_update 10s;
+
+    gateway_gps_latitude "10.200";
+
+    gateway_gps_longitude "11.300";
+
+    gateway_host_name "192.168.1.182:4001";
+
+    gateway_tls_ver 10200;

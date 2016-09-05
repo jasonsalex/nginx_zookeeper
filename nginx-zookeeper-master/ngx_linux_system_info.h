@@ -29,8 +29,16 @@ typedef struct         //定义一个mem occupy的结构体
 {
     char name[20];      //定义一个char类型的数组名name有20个元素
     unsigned int total;
+
     char name2[20];
     unsigned int free;
+
+    char name3[20];
+    unsigned int buffers;
+
+    char name4[20];
+    unsigned int cached;
+
 }MEM_OCCUPY;
 
 

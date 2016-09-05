@@ -10,16 +10,23 @@ void ngx_get_memoccupy (MEM_OCCUPY *mem) //对无类型get函数含有一个形�
 
     fd = fopen ("/proc/meminfo", "r");
 
-    fgets (buff, sizeof(buff), fd);
-//    fgets (buff, sizeof(buff), fd);
-//    fgets (buff, sizeof(buff), fd);
-//    fgets (buff, sizeof(buff), fd);
-    sscanf (buff, "%s %d %s", m->name, &m->total, m->name2);
+    if( fd != NULL)
+    {
+        fgets (buff, sizeof(buff), fd);
+        sscanf (buff, "%s %d %s", m->name, &m->total, m->name2);
 
-    fgets (buff, sizeof(buff), fd); //从fd文件中读取长度为buff的字符串再存到起始地址为buff这个空间里
-    sscanf (buff, "%s %u", m->name2, &m->free);
+        fgets (buff, sizeof(buff), fd); //从fd文件中读取长度为buff的字符串再存到起始地址为buff这个空间里
+        sscanf (buff, "%s %u", m->name2, &m->free);
 
-    fclose(fd);     //关闭文件fd
+        fgets(buff,sizeof(buff),fd);
+        sscanf(buff,"%s %u",m->name3,&m->buffers);
+
+        fgets(buff,sizeof(buff),fd);
+        sscanf(buff,"%s %u",m->name4,&m->cached);
+
+        fclose(fd);     //关闭文件fd
+    }
+
 }
 
 int ngx_cal_cpuoccupy (CPU_OCCUPY *o, CPU_OCCUPY *n)
@@ -49,9 +56,12 @@ void ngx_get_cpuoccupy (CPU_OCCUPY *cpust) //对无类型get函数含有一个�
     cpu_occupy=cpust;
 
     fd = fopen ("/proc/stat", "r");
-    fgets (buff, sizeof(buff), fd);
 
-    sscanf (buff, "%s %u %u %u %u", cpu_occupy->name, &cpu_occupy->user, &cpu_occupy->nice,&cpu_occupy->system, &cpu_occupy->idle);
+    if(fd != NULL)
+    {
+        fgets (buff, sizeof(buff), fd);
+        sscanf (buff, "%s %u %u %u %u", cpu_occupy->name, &cpu_occupy->user, &cpu_occupy->nice,&cpu_occupy->system, &cpu_occupy->idle);
+        fclose(fd);
+    }
 
-    fclose(fd);
 }
